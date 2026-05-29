@@ -6,7 +6,7 @@ import myphoto from "./assets/myphoto.png";
 import blogImg from "./assets/blog.png";
 import taskImg from "./assets/task.png";
 import portfolioImg from "./assets/portfolio.png";
-import Particles from "react-tsparticles";
+import Particles from "@tsparticles/react";
 import { loadFull } from "tsparticles";
 import { TypeAnimation } from "react-type-animation";
 
