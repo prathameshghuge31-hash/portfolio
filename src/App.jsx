@@ -287,7 +287,7 @@ if (loading) {
   className="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-cyan-400 shadow-[0_0_40px_#3b82f6] object-cover hover:scale-105 transition duration-300"
 />
 
-            <h1 className="text-7xl font-extrabold tracking-widest text-white">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-widest text-white text-center break-words">
               PRATHAMESH
             </h1>
 
