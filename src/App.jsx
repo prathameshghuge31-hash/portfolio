@@ -232,8 +232,6 @@ if (loading) {
 
 </ul>
 
-// hi
-
 {/* Mobile Menu Button */}
 <button
   className="md:hidden text-cyan-400"
