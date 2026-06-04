@@ -46,8 +46,7 @@ const handleSubmit = async (e) => {
 
   try {
 
-    await axios.post("http://localhost:5000/send", formData);
-
+   await axios.post("https://portfolio-backend-6pk7.onrender.com/send", formData);
     alert("Message Sent 😭🔥");
 
     setFormData({

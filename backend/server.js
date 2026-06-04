@@ -16,6 +16,13 @@ const transporter = nodemailer.createTransport({
     pass: process.env.PASSWORD,
   },
 });
+transporter.verify(function (error, success) {
+  if (error) {
+    console.log("SMTP ERROR:", error);
+  } else {
+    console.log("SMTP READY");
+  }
+});
 
 app.post("/send", async (req, res) => {
   console.log("Request received");
@@ -39,6 +46,8 @@ app.post("/send", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
