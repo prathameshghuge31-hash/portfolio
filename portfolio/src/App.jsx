@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Menu, X } from "lucide-react";
 import { motion, useScroll } from "framer-motion";
 import resume from "./assets/resume.pdf";
@@ -6,7 +7,7 @@ import myphoto from "./assets/myphoto.png";
 import blogImg from "./assets/blog.png";
 import taskImg from "./assets/task.png";
 import portfolioImg from "./assets/portfolio.png";
-import Particles from "react-tsparticles";
+import Particles from "@tsparticles/react";
 import { loadFull } from "tsparticles";
 import { TypeAnimation } from "react-type-animation";
 
@@ -25,6 +26,43 @@ const { scrollYProgress } = useScroll();
 const [menuOpen, setMenuOpen] = useState(false);
 
 const [activeSection, setActiveSection] = useState("home");
+
+const [formData, setFormData] = useState({
+  name: "",
+  email: "",
+  message: "",
+});
+
+const handleChange = (e) => {
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value,
+  });
+};
+
+const handleSubmit = async (e) => {
+
+  e.preventDefault();
+
+  try {
+
+    await axios.post("http://localhost:5000/send", formData);
+
+    alert("Message Sent 😭🔥");
+
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
+
+  } catch (error) {
+
+    alert("Error sending message");
+
+  }
+
+};
 
 useEffect(() => {
 
@@ -287,7 +325,7 @@ if (loading) {
   className="w-40 h-40 rounded-full mx-auto mb-6 border-4 border-cyan-400 shadow-[0_0_40px_#3b82f6] object-cover hover:scale-105 transition duration-300"
 />
 
-            <h1 className="text-7xl font-extrabold tracking-widest text-white">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-widest text-white text-center break-words">
               PRATHAMESH
             </h1>
 
@@ -604,22 +642,34 @@ if (loading) {
         {/* Contact */}
         <div id="contact" className="py-20 px-6 text-center mt-20">
 
-          <div className="max-w-2xl mx-auto flex flex-col gap-6 mt-10">
+          <form
+  onSubmit={handleSubmit}
+  className="max-w-2xl mx-auto flex flex-col gap-4 md:gap-6 mt-10 px-2"
+>
 
   <input
     type="text"
     placeholder="Your Name"
+    name="name"
+value={formData.name}
+onChange={handleChange}
     className="w-full p-4 rounded-xl bg-white/5 border border-cyan-400 text-white outline-none focus:shadow-[0_0_20px_#3b82f6] transition duration-300"
   />
 
   <input
     type="email"
     placeholder="Your Email"
+    name="email"
+value={formData.email}
+onChange={handleChange}
     className="w-full p-4 rounded-xl bg-white/5 border border-cyan-400 text-white outline-none focus:shadow-[0_0_20px_#3b82f6] transition duration-300"
   />
 
   <textarea
     placeholder="Your Message"
+    name="message"
+value={formData.message}
+onChange={handleChange}
     rows="5"
     className="w-full p-4 rounded-xl bg-white/5 border border-cyan-400 text-white outline-none focus:shadow-[0_0_20px_#3b82f6] transition duration-300"
   ></textarea>
@@ -628,8 +678,7 @@ if (loading) {
     Send Message
   </button>
 
-</div>
-
+</form>
 <div className="mt-20"></div>
           
           <h2 className="text-4xl font-bold text-blue-400 mb-6">
