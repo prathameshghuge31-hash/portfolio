@@ -19,6 +19,10 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+console.log("EMAIL =", process.env.EMAIL);
+console.log("PASSWORD =", process.env.PASSWORD ? "FOUND" : "NOT FOUND");
+console.log("SMTP PORT = 465");
+
 transporter.verify(function (error, success) {
   if (error) {
     console.log("SMTP ERROR:", error);
